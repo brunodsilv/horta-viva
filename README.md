@@ -1,16 +1,30 @@
-# React + Vite
+# 🌱 Horta Viva - Aventura Verde
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bem-vindo ao **Horta Viva**, uma aplicação web focada em engajar estudantes na manutenção e aprendizado sobre hortas escolares através da gamificação. 
 
-Currently, two official plugins are available:
+Este projeto transforma tarefas do dia a dia (como regar plantas ou tirar ervas daninhas) em "Missões" interativas, onde os alunos ganham pontos de experiência (XP) ao completá-las.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Status do Projeto
+Em desenvolvimento ativo. (Fase atual: Construção do painel de missões do aluno).
 
-## React Compiler
+## 🎯 Funcionalidades Atuais
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Autenticação Segura:** Sistema de Login e Cadastro utilizando Firebase Authentication.
+* **Controle de Acessos (Role-Based):** Rotas e interfaces dinâmicas que se adaptam dependendo se o utilizador é **Aluno** ou **Professor**.
+* **Base do Mestre (Painel do Professor):**
+  * Criação de missões com título, descrição e valor de recompensa (XP).
+  * Exclusão de missões.
+  * Sincronização em tempo real do mapa de missões utilizando Firestore (`onSnapshot`).
+* **Dashboard Inteligente:** Reconhece o jogador logado e adapta as opções da tela.
+* **Interface Gamificada:** Design responsivo e atrativo focado na experiência do usuário (UX), utilizando Tailwind CSS.
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologias Utilizadas
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+O projeto foi construído com as seguintes ferramentas:
+
+* **React (com Vite):** Para uma renderização rápida e componentização eficiente.
+* **Tailwind CSS:** Para a estilização rápida e responsiva de toda a interface gamificada.
+* **Firebase (Backend as a Service):**
+  * *Authentication:* Para gestão de usuários (E-mail e Senha).
+  * *Firestore Database:* Banco de dados NoSQL para armazenar os perfis dos usuários e as missões.
+* **GitHub Pages:** Para hospedagem e deploy contínuo.
