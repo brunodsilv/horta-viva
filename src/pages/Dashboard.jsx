@@ -1,8 +1,8 @@
-// src/pages/Dashboard.jsx
-import React, { useEffect, useState } from 'react';
-import { auth, db } from '../firebase';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import React, { useEffect, useState } from "react";
+import { auth, db } from "../firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import Carregamento from '../components/Carregamento';
 
 export default function Dashboard({ setTelaAtual }) {
   const [dadosUsuario, setDadosUsuario] = useState(null);
@@ -21,7 +21,7 @@ export default function Dashboard({ setTelaAtual }) {
         }
       } else {
         // Se ninguém estiver logado, chuta de volta pro login
-        setTelaAtual('login');
+        setTelaAtual("login");
       }
       setCarregando(false);
     });
@@ -37,39 +37,30 @@ export default function Dashboard({ setTelaAtual }) {
 
   // Tela de carregamento enquanto o Firebase busca os dados
   if (carregando) {
-    return (
-      <div className="min-h-screen bg-[#eef7ec] flex items-center justify-center font-sans">
-        <p className="text-2xl font-black text-green-800 animate-pulse uppercase tracking-wide drop-shadow-sm">
-          🌱 Carregando a Horta...
-        </p>
-      </div>
-    );
+    return <Carregamento mensagem="🌱 A carregar a Horta..." />;
   }
 
   return (
     <div className="min-h-screen bg-[#eef7ec] p-8 flex flex-col items-center justify-center font-sans">
-      
       {/* CARTÃO PRINCIPAL */}
       <div className="bg-[#fffdf0] border-[6px] border-green-600 rounded-[2rem] p-8 max-w-lg w-full text-center shadow-[0_8px_0_0_rgba(22,101,52,1)] relative z-10">
-        
         {/* Tag de Identificação Dinâmica */}
         <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-amber-400 border-4 border-amber-700 text-amber-900 font-black px-6 py-1 rounded-full text-sm uppercase tracking-widest shadow-sm">
-          {dadosUsuario?.tipo || 'Jogador'}
+          {dadosUsuario?.tipo || "Jogador"}
         </div>
 
         <h1 className="text-3xl font-black text-green-800 mb-2 mt-4">
-          Olá, {dadosUsuario?.nome || 'Aventureiro'}!
+          Olá, {dadosUsuario?.nome || "Aventureiro"}!
         </h1>
         <p className="font-bold text-green-700 mb-8 opacity-80">
           O que vamos fazer na horta hoje?
         </p>
-        
+
         <div className="space-y-4">
-          
           {/* BOTÃO EXCLUSIVO: PROFESSOR */}
-          {dadosUsuario?.tipo === 'Professor' && (
-            <button 
-              onClick={() => setTelaAtual('painel-professor')} 
+          {dadosUsuario?.tipo === "Professor" && (
+            <button
+              onClick={() => setTelaAtual("painel-professor")}
               className="w-full bg-amber-500 text-white font-black px-6 py-4 rounded-2xl border-[4px] border-amber-800 shadow-[0_6px_0_0_#92400e] active:translate-y-[6px] active:shadow-none uppercase transition-all tracking-wide flex items-center justify-center gap-2"
             >
               <span className="text-2xl">👨‍🏫</span> Base do Mestre
@@ -79,22 +70,32 @@ export default function Dashboard({ setTelaAtual }) {
           {/* BOTÃO EXCLUSIVO: ALUNO */}
           {dadosUsuario?.tipo === 'Aluno' && (
             <button 
-              onClick={() => alert('Calma aí! O mapa de missões do aluno está em construção. 🚧')}
+              onClick={() => setTelaAtual('mapa-missoes')} 
               className="w-full bg-blue-500 text-white font-black px-6 py-4 rounded-2xl border-[4px] border-blue-800 shadow-[0_6px_0_0_#1e40af] active:translate-y-[6px] active:shadow-none uppercase transition-all tracking-wide flex items-center justify-center gap-2"
             >
               <span className="text-2xl">🗺️</span> Ver Mapa de Missões
             </button>
           )}
 
+          {/* BOTÃO COMPARTILHADO: RANKING */}
+          <button 
+            onClick={() => setTelaAtual('ranking')} 
+            className="w-full bg-purple-500 text-white font-black px-6 py-4 rounded-2xl border-[4px] border-purple-800 shadow-[0_6px_0_0_#6b21a8] active:translate-y-[6px] active:shadow-none uppercase transition-all tracking-wide flex items-center justify-center gap-2 mt-4"
+          >
+            <span className="text-2xl">🏆</span> Ver Ranking
+          </button>
+
+          {/* DIVISÓRIA E BOTÃO DE SAIR */}
+          <div className="pt-4 border-t-4 border-green-200 border-dashed mt-4"></div>
+
           <div className="pt-4 border-t-4 border-green-200 border-dashed mt-4">
-            <button 
-              onClick={sairDoJogo} 
+            <button
+              onClick={sairDoJogo}
               className="w-full bg-red-500 text-white font-black px-6 py-4 rounded-2xl border-[4px] border-red-800 shadow-[0_6px_0_0_#991b1b] active:translate-y-[6px] active:shadow-none uppercase transition-all tracking-wide"
             >
               Sair do Jogo
             </button>
           </div>
-
         </div>
       </div>
     </div>

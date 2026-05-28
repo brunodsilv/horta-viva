@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { auth } from '../firebase'; 
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import Alerta from '../components/Alerta';
 
 export default function Login({ setTelaAtual }) {
   const [email, setEmail] = useState('');
@@ -33,18 +34,14 @@ export default function Login({ setTelaAtual }) {
         
         <div className="text-center mb-8">
           <h1 className="text-5xl font-black text-green-800 drop-shadow-sm flex items-center justify-center gap-3">
-            🌱 Horta Viva 🌻
+            🌱 EuriHorta 🌻
           </h1>
           <p className="text-lg font-bold text-green-700 mt-2 tracking-wide uppercase">
             Aventura Verde - Gamificação da Horta Escolar
           </p>
         </div>
 
-        {mensagemErro && (
-          <div className="mb-6 p-4 w-full max-w-md bg-red-100 border-4 border-red-500 rounded-xl text-red-700 font-black text-center uppercase tracking-wide">
-            ⚠️ {mensagemErro}
-          </div>
-        )}
+        <Alerta texto={mensagemErro} tipo="erro" />
 
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* CARTÃO ALUNO */}
